@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import org.apache.cordova.CallbackContext;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.net.HttpURLConnection;
@@ -13,6 +12,7 @@ import java.io.InputStreamReader;
 import java.net.Proxy;
 import java.net.InetSocketAddress;
 import android.util.Log;
+import org.apache.cordova.*;
 
 public class Httpproxy extends CordovaPlugin {
     
