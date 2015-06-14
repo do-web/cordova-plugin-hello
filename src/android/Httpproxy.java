@@ -34,7 +34,7 @@ public class Httpproxy extends CordovaPlugin {
                 
                 callbackContext.success(data);
             } catch (Exception e) {
-                callbackContext.error('Error: ' + e.getMessage());
+              //   callbackContext.error('Error: ' + e.getMessage());
             }
             
             return true;
@@ -58,13 +58,13 @@ public class Httpproxy extends CordovaPlugin {
             return content.toString();
             
             } catch (IOException e) {
-            callbackContext.error('Error: ' + e.getMessage());
+          //   callbackContext.error('Error: ' + e.getMessage());
             } finally {
             if (reader != null) {
                 try {
                     reader.close();
                     } catch (IOException e) {
-                    callbackContext.error('Error: ' + e.getMessage());
+                  //   callbackContext.error('Error: ' + e.getMessage());
                 }
             }
         }
