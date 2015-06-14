@@ -13,6 +13,7 @@ import java.net.Proxy;
 import java.net.InetSocketAddress;
 import android.util.Log;
 import org.apache.cordova.*;
+import org.json.JSONArray;
 
 public class Httpproxy extends CordovaPlugin {
     
@@ -26,7 +27,7 @@ public class Httpproxy extends CordovaPlugin {
             
             try {
                 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("52.24.43.118", 3128));
-                HttpURLConnection con = (HttpURLConnection)new URL(this.getUrlString()).openConnection(proxy);
+                HttpURLConnection con = (HttpURLConnection)new URL(uri).openConnection(proxy);
                 
                 con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 String data = readStream(con.getInputStream());
@@ -44,7 +45,7 @@ public class Httpproxy extends CordovaPlugin {
         }
     }
 
-    private void readStream(InputStream in) {
+    private String readStream(InputStream in) {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new InputStreamReader(in));
