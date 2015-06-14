@@ -24,18 +24,23 @@ public class Httpproxy extends CordovaPlugin {
         if (action.equals("get")) {
             
             String uri = data.getString(0);
-            
+            String proxyHost = data.getString(1);
+            Integer proxyPort = data.getInt(2);
+
             try {
-                Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("52.24.43.118", 3128));
+                Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
                 HttpURLConnection con = (HttpURLConnection)new URL(uri).openConnection(proxy);
-                
                 con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 String resultData = readStream(con.getInputStream());
                 con.disconnect();
-                LOG.w("data: ", resultData);
-                callbackContext.success(resultData);
+                if(resultData == "") {
+                    callbackContext.error("Empty response.");
+                } else {
+                    callbackContext.success(resultData);
+                }
+                
             } catch (Exception e) {
-              //   callbackContext.error('Error: ' + e.getMessage());
+                callbackContext.error("Error: " + e.getMessage());
             }
             
             return true;
