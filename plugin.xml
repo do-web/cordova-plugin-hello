@@ -3,7 +3,7 @@
         id="com.doweb.httpproxy"
         version="1.0.0">
 
-  <name>Hello</name>
+  <name>Httpproxy</name>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
