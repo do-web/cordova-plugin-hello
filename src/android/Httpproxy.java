@@ -30,6 +30,7 @@ public class Httpproxy extends CordovaPlugin {
             try {
                 Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
                 HttpURLConnection con = (HttpURLConnection)new URL(uri).openConnection(proxy);
+                con.setConnectTimeout(5000);
                 con.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
                 String resultData = readStream(con.getInputStream());
                 con.disconnect();
@@ -38,7 +39,8 @@ public class Httpproxy extends CordovaPlugin {
                 } else {
                     callbackContext.success(resultData);
                 }
-                
+            } catch (java.net.SocketTimeoutException e) {
+                callbackContext.error("Error: " + e.getMessage());
             } catch (Exception e) {
                 callbackContext.error("Error: " + e.getMessage());
             }
